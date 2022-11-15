@@ -1,16 +1,34 @@
 package com.bridgelabz;
 
 public class EmployeeWage {
-    static final int fullTime = 1;
-    static final int partTime = 2;
 
-    static void calculateWage(String company, int wagePerHr, int daysPerMonth, int workHrPerMonth) {
+    public final int fullTime = 1;
+    public final int partTime = 2;
+
+    String company;
+    int wagePerHr;
+    int daysPerMonth;
+    int workHrPerMonth;
+    int totalWage;
+
+    public EmployeeWage(String company, int wagePerHr, int daysPerMonth, int workHrPerMonth) {
+        this.company = company;
+        this.wagePerHr = wagePerHr;
+        this.daysPerMonth = daysPerMonth;
+        this.workHrPerMonth = workHrPerMonth;
+    }
+
+    @Override
+    public String toString() {
+        return "Total employee wage for " + company + " is " + totalWage;
+    }
+
+    void calculateWage() {
 
         int empHrs;
         int totalHours = 0;
         int dailyWage;
         int day = 0;
-        int totalWage = 0;
 
         while ((totalHours < workHrPerMonth) && (day < daysPerMonth)) {
 
@@ -31,18 +49,21 @@ public class EmployeeWage {
             dailyWage = wagePerHr * empHrs;
             totalWage = totalWage + dailyWage;
             day++;
-            System.out.println("Day " + day + " Emp work hour " + empHrs + " wage is " + dailyWage);
         }
         System.out.println("Total work hours is: " + totalHours);
         System.out.println("Total work days are: " + day);
-        System.out.println("Total Wage of company " + company + " is " + totalWage);
     }
 
     public static void main(String[] args) {
-        calculateWage("Bajaj", 50, 20, 100);
-        System.out.println("---------------------------------");
-        calculateWage("HeroHonda", 60, 28, 90);
-        System.out.println("---------------------------------");
-        calculateWage("Yamaha", 80, 30, 80);
+
+        EmployeeWage Bajaj = new EmployeeWage("Bajaj", 50, 20, 100);
+        EmployeeWage HeroHonda = new EmployeeWage("HeroHonda", 60, 28, 90);
+        EmployeeWage Yamaha = new EmployeeWage("Yamaha", 80, 30, 80);
+        Bajaj.calculateWage();
+        System.out.println(Bajaj);
+        HeroHonda.calculateWage();
+        System.out.println(HeroHonda);
+        Yamaha.calculateWage();
+        System.out.println(Yamaha);
     }
 }
